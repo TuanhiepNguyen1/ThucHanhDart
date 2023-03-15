@@ -1,9 +1,14 @@
 import 'dart:io';
 
 void main() {
-  File file = File('hello.txt');
-  if (file.existsSync()) {
-    File copyFile = File('hello_copy.txt');
-    copyFile.writeAsBytesSync(file.readAsBytesSync());
-  }
+  String sourcePath = "hello.txt";
+  String targetPath = "hello_copy.txt";
+
+  File sourceFile = File(sourcePath);
+
+  sourceFile.copy(targetPath).then((value) {
+    print("$sourcePath has been copied to $targetPath successfully!");
+  }).catchError((onError) {
+    print("An error occurred: $onError");
+  });
 }
